@@ -1,0 +1,10 @@
+
+/lnx/
+/win/
+
+/tags
+/cscope.out
+/_vim/cscope.files
+/_vim/cscope.in?
+
+/date.now.txt
