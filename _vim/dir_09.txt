@@ -1,0 +1,11 @@
+/home/GoTools/_go1.11.2.linux-amd64/go/src/encoding/binary
+/home/GoTools/_go1.11.2.linux-amd64/go/src/log
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/app
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/event/lifecycle
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/event/paint
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/event/size
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/event/touch
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/exp/app/debug
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/exp/f32
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/exp/gl/glutil
+/home/GoTools/_go1.11.2.linux-amd64/GOPATH/src/golang.org/x/mobile/gl
