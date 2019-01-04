@@ -46,6 +46,7 @@ func glMainLoop(___a app.App) {
 				// As we are actively painting as fast as
 				// we can (usually 60 FPS), skip any paint
 				// events sent by the system.
+				time.Sleep(50 * time.Millisecond)
 				continue
 			}
 
@@ -59,7 +60,7 @@ func glMainLoop(___a app.App) {
 			_touchX = __e02.X
 			_touchY = __e02.Y
 		default:
-			time.Sleep(200 * time.Millisecond)
+			time.Sleep(100 * time.Millisecond)
 		} // switch __e02 := ___a.Filter(__e01).(type) {
 	} // for __e01 := range ___a.Events() {
 } // glMainLoop
