@@ -15,13 +15,13 @@ import (
 	"golang.org/x/mobile/gl"
 )
 
-var triangleData = f32.Bytes(binary.LittleEndian,
+var _triangleDataByteARR = f32.Bytes(binary.LittleEndian,
 	0.0, 0.1, 0.0, // top left
 	0.0, 0.0, 0.0, // bottom left
 	0.1, 0.0, 0.0, // bottom right
-) // triangleData
+) // _triangleDataByteARR
 
-const vertexShader = `#version 100
+const _vertexShaderSTR = `#version 100
 uniform vec2 offset;
 
 attribute vec4 position;
@@ -32,7 +32,7 @@ void main() {
 	gl_Position = position + offset4;
 }`
 
-const fragmentShader = `#version 100
+const _fragmentShaderSTR = `#version 100
 precision mediump float;
 uniform vec4 color;
 void main() {
@@ -51,7 +51,7 @@ var (
 
 func glOnStart(___glctx1 gl.Context) {
 	var __err1 error
-	_program, __err1 = glutil.CreateProgram(___glctx1, vertexShader, fragmentShader)
+	_program, __err1 = glutil.CreateProgram(___glctx1, _vertexShaderSTR, _fragmentShaderSTR)
 	if __err1 != nil {
 		log.Printf("error creating GL program: %v", __err1)
 		return
@@ -59,7 +59,7 @@ func glOnStart(___glctx1 gl.Context) {
 
 	_buf = ___glctx1.CreateBuffer()
 	___glctx1.BindBuffer(gl.ARRAY_BUFFER, _buf)
-	___glctx1.BufferData(gl.ARRAY_BUFFER, triangleData, gl.STATIC_DRAW)
+	___glctx1.BufferData(gl.ARRAY_BUFFER, _triangleDataByteARR, gl.STATIC_DRAW)
 
 	_position = ___glctx1.GetAttribLocation(_program, "position")
 	_color = ___glctx1.GetUniformLocation(_program, "color")
