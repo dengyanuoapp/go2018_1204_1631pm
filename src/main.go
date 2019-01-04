@@ -44,109 +44,109 @@ import (
 )
 
 var (
-	images   *glutil.Images
-	fps      *debug.FPS
-	program  gl.Program
-	position gl.Attrib
-	offset   gl.Uniform
-	color    gl.Uniform
-	buf      gl.Buffer
+	_images   *glutil.Images
+	_fps      *debug.FPS
+	_program  gl.Program
+	_position gl.Attrib
+	_offset   gl.Uniform
+	_color    gl.Uniform
+	_buf      gl.Buffer
 
-	green  float32
-	touchX float32
-	touchY float32
+	_green  float32
+	_touchX float32
+	_touchY float32
 )
 
 func main() {
 	app.Main(
-		func(a app.App) {
-			var glctx gl.Context
-			var sz size.Event
-			for e := range a.Events() {
-				switch e := a.Filter(e).(type) {
+		func(___a app.App) {
+			var __glctx gl.Context
+			var __sz0 size.Event
+			for __e01 := range ___a.Events() {
+				switch __e02 := ___a.Filter(__e01).(type) {
 				case lifecycle.Event:
-					switch e.Crosses(lifecycle.StageVisible) {
+					switch __e02.Crosses(lifecycle.StageVisible) {
 					case lifecycle.CrossOn:
-						glctx, _ = e.DrawContext.(gl.Context)
-						onStart(glctx)
-						a.Send(paint.Event{})
+						__glctx, _ = __e02.DrawContext.(gl.Context)
+						onStart(__glctx)
+						___a.Send(paint.Event{})
 					case lifecycle.CrossOff:
-						onStop(glctx)
-						glctx = nil
+						onStop(__glctx)
+						__glctx = nil
 					}
 				case size.Event:
-					sz = e
-					touchX = float32(sz.WidthPx / 2)
-					touchY = float32(sz.HeightPx / 2)
+					__sz0 = __e02
+					_touchX = float32(__sz0.WidthPx / 2)
+					_touchY = float32(__sz0.HeightPx / 2)
 				case paint.Event:
-					if glctx == nil || e.External {
+					if __glctx == nil || __e02.External {
 						// As we are actively painting as fast as
 						// we can (usually 60 FPS), skip any paint
 						// events sent by the system.
 						continue
 					}
 
-					onPaint(glctx, sz)
-					a.Publish()
+					onPaint(__glctx, __sz0)
+					___a.Publish()
 					// Drive the animation by preparing to paint the next frame
 					// after this one is shown.
-					a.Send(paint.Event{})
+					___a.Send(paint.Event{})
 				case touch.Event:
-					touchX = e.X
-					touchY = e.Y
-				} // switch e := a.Filter(e).(type) {
-			} // for e := range a.Events() {
-		}) // app.Main( // func(a app.App) {
+					_touchX = __e02.X
+					_touchY = __e02.Y
+				} // switch __e02 := ___a.Filter(__e01).(type) {
+			} // for __e01 := range ___a.Events() {
+		}) // app.Main( // func(___a app.App) {
 } // main
 
-func onStart(glctx gl.Context) {
-	var err error
-	program, err = glutil.CreateProgram(glctx, vertexShader, fragmentShader)
-	if err != nil {
-		log.Printf("error creating GL program: %v", err)
+func onStart(___glctx1 gl.Context) {
+	var __err1 error
+	_program, __err1 = glutil.CreateProgram(___glctx1, vertexShader, fragmentShader)
+	if __err1 != nil {
+		log.Printf("error creating GL program: %v", __err1)
 		return
 	}
 
-	buf = glctx.CreateBuffer()
-	glctx.BindBuffer(gl.ARRAY_BUFFER, buf)
-	glctx.BufferData(gl.ARRAY_BUFFER, triangleData, gl.STATIC_DRAW)
+	_buf = ___glctx1.CreateBuffer()
+	___glctx1.BindBuffer(gl.ARRAY_BUFFER, _buf)
+	___glctx1.BufferData(gl.ARRAY_BUFFER, triangleData, gl.STATIC_DRAW)
 
-	position = glctx.GetAttribLocation(program, "position")
-	color = glctx.GetUniformLocation(program, "color")
-	offset = glctx.GetUniformLocation(program, "offset")
+	_position = ___glctx1.GetAttribLocation(_program, "position")
+	_color = ___glctx1.GetUniformLocation(_program, "color")
+	_offset = ___glctx1.GetUniformLocation(_program, "offset")
 
-	images = glutil.NewImages(glctx)
-	fps = debug.NewFPS(images)
+	_images = glutil.NewImages(___glctx1)
+	_fps = debug.NewFPS(_images)
 } // onStart
 
-func onStop(glctx gl.Context) {
-	glctx.DeleteProgram(program)
-	glctx.DeleteBuffer(buf)
-	fps.Release()
-	images.Release()
+func onStop(___glctx2 gl.Context) {
+	___glctx2.DeleteProgram(_program)
+	___glctx2.DeleteBuffer(_buf)
+	_fps.Release()
+	_images.Release()
 } // onStop
 
-func onPaint(glctx gl.Context, sz size.Event) {
-	glctx.ClearColor(1, 0, 0, 1)
-	glctx.Clear(gl.COLOR_BUFFER_BIT)
+func onPaint(___glctx3 gl.Context, __sz3 size.Event) {
+	___glctx3.ClearColor(1, 0, 0, 1)
+	___glctx3.Clear(gl.COLOR_BUFFER_BIT)
 
-	glctx.UseProgram(program)
+	___glctx3.UseProgram(_program)
 
-	green += 0.01
-	if green > 1 {
-		green = 0
+	_green += 0.01
+	if _green > 1 {
+		_green = 0
 	}
-	glctx.Uniform4f(color, 0, green, 0, 1)
+	___glctx3.Uniform4f(_color, 0, _green, 0, 1)
 
-	glctx.Uniform2f(offset, touchX/float32(sz.WidthPx), touchY/float32(sz.HeightPx))
+	___glctx3.Uniform2f(_offset, _touchX/float32(__sz3.WidthPx), _touchY/float32(__sz3.HeightPx))
 
-	glctx.BindBuffer(gl.ARRAY_BUFFER, buf)
-	glctx.EnableVertexAttribArray(position)
-	glctx.VertexAttribPointer(position, coordsPerVertex, gl.FLOAT, false, 0, 0)
-	glctx.DrawArrays(gl.TRIANGLES, 0, vertexCount)
-	glctx.DisableVertexAttribArray(position)
+	___glctx3.BindBuffer(gl.ARRAY_BUFFER, _buf)
+	___glctx3.EnableVertexAttribArray(_position)
+	___glctx3.VertexAttribPointer(_position, _coordsPerVertex, gl.FLOAT, false, 0, 0)
+	___glctx3.DrawArrays(gl.TRIANGLES, 0, _vertexCount)
+	___glctx3.DisableVertexAttribArray(_position)
 
-	fps.Draw(sz)
+	_fps.Draw(__sz3)
 } // onPaint
 
 var triangleData = f32.Bytes(binary.LittleEndian,
@@ -156,8 +156,8 @@ var triangleData = f32.Bytes(binary.LittleEndian,
 ) // triangleData
 
 const (
-	coordsPerVertex = 3
-	vertexCount     = 3
+	_coordsPerVertex = 3
+	_vertexCount     = 3
 )
 
 const vertexShader = `#version 100
