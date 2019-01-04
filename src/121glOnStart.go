@@ -57,14 +57,14 @@ func glOnStart(___glctx1 gl.Context) {
 		return
 	}
 
-	_glBuf = ___glctx1.CreateBuffer()
-	___glctx1.BindBuffer(gl.ARRAY_BUFFER, _glBuf)
-	___glctx1.BufferData(gl.ARRAY_BUFFER, _triangleDataByteARR, gl.STATIC_DRAW)
+	_glBuf = ___glctx1.CreateBuffer() // CreateBuffer() Buffer  // CreateFramebuffer creates a framebuffer object.
+	___glctx1.BindBuffer(gl.ARRAY_BUFFER, _glBuf) //  BindBuffer(target Enum, b Buffer)
+	___glctx1.BufferData(gl.ARRAY_BUFFER, _triangleDataByteARR, gl.STATIC_DRAW) // BufferData(target Enum, src []byte, usage Enum)
 
-	_glPosition = ___glctx1.GetAttribLocation(_glProgram, "position")
-	_glColor = ___glctx1.GetUniformLocation(_glProgram, "color")
-	_glOffset = ___glctx1.GetUniformLocation(_glProgram, "offset")
+	_glPosition = ___glctx1.GetAttribLocation(_glProgram, "position") // GetAttribLocation(p Program, name string) Attrib
+	_glColor = ___glctx1.GetUniformLocation(_glProgram, "color")      // GetUniformLocation(p Program, name string) Uniform
+	_glOffset = ___glctx1.GetUniformLocation(_glProgram, "offset")    // ...
 
-	_glImages = glutil.NewImages(___glctx1)
-	_dbFps = debug.NewFPS(_glImages)
+	_glImages = glutil.NewImages(___glctx1)  // func (p *Images) NewImage(w, h int) *Image
+	_dbFps = debug.NewFPS(_glImages)         // func NewFPS(images *glutil.Images) *FPS
 } // glOnStart
