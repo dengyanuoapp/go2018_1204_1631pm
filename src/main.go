@@ -13,8 +13,13 @@ import (
 	//"golang.org/x/mobile/exp/f32"
 	//"golang.org/x/mobile/exp/gl/glutil"
 	//"golang.org/x/mobile/gl"
+
+	"time"
 )
 
 func main() {
+	textBoxMain()
+	time.Sleep(5 * time.Second)
+
 	app.Main(glMainLoop) // app.Main( // func(___a app.App) {
 } // main
