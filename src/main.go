@@ -19,7 +19,7 @@ import (
 
 func main() {
 	textBoxMain()
-	time.Sleep(5 * time.Second)
+	time.Sleep(150 * time.Second)
 
 	app.Main(glMainLoop) // app.Main( // func(___a app.App) {
 } // main

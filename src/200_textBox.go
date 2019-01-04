@@ -19,6 +19,7 @@ import (
 	"strings"
 	"unicode/utf8"
 	*/
+	"time"
 )
 
 // _toyFace implements the font.Face interface by measuring every rune's width
@@ -30,11 +31,11 @@ func (_toyFace) Close() error {
 }
 
 func (_toyFace) Glyph(dot fixed.Point26_6, r rune) (image.Rectangle, image.Image, image.Point, fixed.Int26_6, bool) {
-    panic("unimplemented")
+    panic("unimplemented 183811")
 }
 
 func (_toyFace) GlyphBounds(r rune) (fixed.Rectangle26_6, fixed.Int26_6, bool) {
-    panic("unimplemented")
+    panic("unimplemented 183812")
 }
 
 func (_toyFace) GlyphAdvance(r rune) (fixed.Int26_6, bool) {
@@ -75,11 +76,17 @@ func textBoxMain() {
     c.WriteString(_mobyDick)
     c.Close()
 
+
     fmt.Println("====")
     _printFrame(&f, false)
+
     fmt.Println("====")
     fmt.Println("123456789_123456789_123456789_123456789_123456789_123456789_")
     _printFrame(&f, true)
+
+
+	time.Sleep(150 * time.Second)
+
     fmt.Println("====")
 
 }
