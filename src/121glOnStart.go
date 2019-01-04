@@ -40,31 +40,31 @@ void main() {
 }`
 
 var (
-	_images   *glutil.Images
-	_fps      *debug.FPS
-	_program  gl.Program
-	_position gl.Attrib
-	_offset   gl.Uniform
-	_color    gl.Uniform
-	_buf      gl.Buffer
+	_glImages   *glutil.Images
+	_dbFps      *debug.FPS
+	_glProgram  gl.Program
+	_glPosition gl.Attrib
+	_glOffset   gl.Uniform
+	_glColor    gl.Uniform
+	_glBuf      gl.Buffer
 )
 
 func glOnStart(___glctx1 gl.Context) {
 	var __err1 error
-	_program, __err1 = glutil.CreateProgram(___glctx1, _vertexShaderSTR, _fragmentShaderSTR)
+	_glProgram, __err1 = glutil.CreateProgram(___glctx1, _vertexShaderSTR, _fragmentShaderSTR)
 	if __err1 != nil {
 		log.Printf("error creating GL program: %v", __err1)
 		return
 	}
 
-	_buf = ___glctx1.CreateBuffer()
-	___glctx1.BindBuffer(gl.ARRAY_BUFFER, _buf)
+	_glBuf = ___glctx1.CreateBuffer()
+	___glctx1.BindBuffer(gl.ARRAY_BUFFER, _glBuf)
 	___glctx1.BufferData(gl.ARRAY_BUFFER, _triangleDataByteARR, gl.STATIC_DRAW)
 
-	_position = ___glctx1.GetAttribLocation(_program, "position")
-	_color = ___glctx1.GetUniformLocation(_program, "color")
-	_offset = ___glctx1.GetUniformLocation(_program, "offset")
+	_glPosition = ___glctx1.GetAttribLocation(_glProgram, "position")
+	_glColor = ___glctx1.GetUniformLocation(_glProgram, "color")
+	_glOffset = ___glctx1.GetUniformLocation(_glProgram, "offset")
 
-	_images = glutil.NewImages(___glctx1)
-	_fps = debug.NewFPS(_images)
+	_glImages = glutil.NewImages(___glctx1)
+	_dbFps = debug.NewFPS(_glImages)
 } // glOnStart

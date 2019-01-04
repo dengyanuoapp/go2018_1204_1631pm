@@ -16,8 +16,8 @@ import (
 )
 
 func glOnStop(___glctx2 gl.Context) {
-	___glctx2.DeleteProgram(_program)
-	___glctx2.DeleteBuffer(_buf)
-	_fps.Release()
-	_images.Release()
+	___glctx2.DeleteProgram(_glProgram)
+	___glctx2.DeleteBuffer(_glBuf)
+	_dbFps.Release()
+	_glImages.Release()
 } // glOnStop
