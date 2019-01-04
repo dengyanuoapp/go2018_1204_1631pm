@@ -14,12 +14,17 @@ import (
 	//"golang.org/x/mobile/exp/gl/glutil"
 	//"golang.org/x/mobile/gl"
 
-	"time"
+	//"time"
 )
 
 func main() {
+	ggMain()
+	/*
+	time.Sleep(150 * time.Second)
+
 	textBoxMain()
 	time.Sleep(150 * time.Second)
 
 	app.Main(glMainLoop) // app.Main( // func(___a app.App) {
+	*/
 } // main
