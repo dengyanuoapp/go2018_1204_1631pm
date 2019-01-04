@@ -20,6 +20,10 @@ const (
 	_vertexCount     = 3
 )
 
+var (
+	_green float32
+)
+
 func glOnPaint(___glctx3 gl.Context, __sz3 size.Event) {
 	___glctx3.ClearColor(1, 0, 0, 1)
 	___glctx3.Clear(gl.COLOR_BUFFER_BIT)

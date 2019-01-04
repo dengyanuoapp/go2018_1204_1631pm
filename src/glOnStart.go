@@ -39,6 +39,16 @@ void main() {
 	gl_FragColor = color;
 }`
 
+var (
+	_images   *glutil.Images
+	_fps      *debug.FPS
+	_program  gl.Program
+	_position gl.Attrib
+	_offset   gl.Uniform
+	_color    gl.Uniform
+	_buf      gl.Buffer
+)
+
 func glOnStart(___glctx1 gl.Context) {
 	var __err1 error
 	_program, __err1 = glutil.CreateProgram(___glctx1, vertexShader, fragmentShader)

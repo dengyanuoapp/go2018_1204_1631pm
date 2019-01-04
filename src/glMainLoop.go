@@ -15,6 +15,11 @@ import (
 	"golang.org/x/mobile/gl"
 )
 
+var (
+	_touchX float32
+	_touchY float32
+)
+
 func glMainLoop(___a app.App) {
 	var __glctx gl.Context
 	var __sz0 size.Event
