@@ -40,8 +40,8 @@ void main() {
 }`
 
 var (
-	_glImages   *glutil.Images
 	_dbFps      *debug.FPS
+	_glImages   *glutil.Images
 	_glProgram  gl.Program
 	_glPosition gl.Attrib
 	_glOffset   gl.Uniform
