@@ -25,18 +25,18 @@ var (
 )
 
 func glOnPaint(___glctx3 gl.Context, __sz3 size.Event) {
-	___glctx3.ClearColor(1, 0, 0, 1)
-	___glctx3.Clear(gl.COLOR_BUFFER_BIT)
+	___glctx3.ClearColor(1, 0, 0, 1) // ClearColor(red, green, blue, alpha float32) // ClearColor specifies the RGBA values used to clear color buffers.
+	___glctx3.Clear(gl.COLOR_BUFFER_BIT) // Clear(mask Enum) // // Clear clears the window.
 
-	___glctx3.UseProgram(_glProgram)
+	___glctx3.UseProgram(_glProgram) // UseProgram(p Program) // UseProgram sets the active program
 
 	_green += 0.01
 	if _green > 1 {
 		_green = 0
 	}
-	___glctx3.Uniform4f(_glColor, 0, _green, 0, 1)
+	___glctx3.Uniform4f(_glColor, 0, _green, 0, 1) // Uniform4f(dst Uniform, v0, v1, v2, v3 float32) // writes a vec4 uniform variable.
 
-	___glctx3.Uniform2f(_glOffset, _touchX/float32(__sz3.WidthPx), _touchY/float32(__sz3.HeightPx))
+	___glctx3.Uniform2f(_glOffset, _touchX/float32(__sz3.WidthPx), _touchY/float32(__sz3.HeightPx)) // Uniform2f(dst Uniform, v0, v1 float32)
 
 	___glctx3.BindBuffer(gl.ARRAY_BUFFER, _glBuf)
 	___glctx3.EnableVertexAttribArray(_glPosition)
