@@ -16,9 +16,9 @@ import (
 )
 
 var _triangleDataByteARR = f32.Bytes(binary.LittleEndian,
-	0.0, 0.1, 0.0, // top left
+	0.0, 0.05, 0.0, // top left
 	0.0, 0.0, 0.0, // bottom left
-	0.1, 0.0, 0.0, // bottom right
+	0.05, 0.0, 0.0, // bottom right
 ) // _triangleDataByteARR
 
 const _vertexShaderSTR = `#version 100
