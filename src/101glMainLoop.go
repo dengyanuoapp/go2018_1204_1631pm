@@ -13,6 +13,8 @@ import (
 	//"golang.org/x/mobile/exp/f32"
 	//"golang.org/x/mobile/exp/gl/glutil"
 	"golang.org/x/mobile/gl"
+
+	"time"
 )
 
 var (
@@ -51,10 +53,13 @@ func glMainLoop(___a app.App) {
 			___a.Publish()
 			// Drive the animation by preparing to paint the next frame
 			// after this one is shown.
+			time.Sleep(200 * time.Millisecond)
 			___a.Send(paint.Event{})
 		case touch.Event:
 			_touchX = __e02.X
 			_touchY = __e02.Y
+		default:
+			time.Sleep(200 * time.Millisecond)
 		} // switch __e02 := ___a.Filter(__e01).(type) {
 	} // for __e01 := range ___a.Events() {
 } // glMainLoop
