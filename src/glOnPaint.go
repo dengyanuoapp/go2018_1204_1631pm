@@ -15,6 +15,11 @@ import (
 	"golang.org/x/mobile/gl"
 )
 
+const (
+	_coordsPerVertex = 3
+	_vertexCount     = 3
+)
+
 func glOnPaint(___glctx3 gl.Context, __sz3 size.Event) {
 	___glctx3.ClearColor(1, 0, 0, 1)
 	___glctx3.Clear(gl.COLOR_BUFFER_BIT)
