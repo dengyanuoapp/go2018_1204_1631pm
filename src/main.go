@@ -58,45 +58,47 @@ var (
 )
 
 func main() {
-	app.Main(func(a app.App) {
-		var glctx gl.Context
-		var sz size.Event
-		for e := range a.Events() {
-			switch e := a.Filter(e).(type) {
-			case lifecycle.Event:
-				switch e.Crosses(lifecycle.StageVisible) {
-				case lifecycle.CrossOn:
-					glctx, _ = e.DrawContext.(gl.Context)
-					onStart(glctx)
-					a.Send(paint.Event{})
-				case lifecycle.CrossOff:
-					onStop(glctx)
-					glctx = nil
-				}
-			case size.Event:
-				sz = e
-				touchX = float32(sz.WidthPx / 2)
-				touchY = float32(sz.HeightPx / 2)
-			case paint.Event:
-				if glctx == nil || e.External {
-					// As we are actively painting as fast as
-					// we can (usually 60 FPS), skip any paint
-					// events sent by the system.
-					continue
-				}
+	app.Main(
+		func(a app.App) {
+			var glctx gl.Context
+			var sz size.Event
+			for e := range a.Events() {
+				switch e := a.Filter(e).(type) {
+				case lifecycle.Event:
+					switch e.Crosses(lifecycle.StageVisible) {
+					case lifecycle.CrossOn:
+						glctx, _ = e.DrawContext.(gl.Context)
+						onStart(glctx)
+						a.Send(paint.Event{})
+					case lifecycle.CrossOff:
+						onStop(glctx)
+						glctx = nil
+					}
+				case size.Event:
+					sz = e
+					touchX = float32(sz.WidthPx / 2)
+					touchY = float32(sz.HeightPx / 2)
+				case paint.Event:
+					if glctx == nil || e.External {
+						// As we are actively painting as fast as
+						// we can (usually 60 FPS), skip any paint
+						// events sent by the system.
+						continue
+					}
 
-				onPaint(glctx, sz)
-				a.Publish()
-				// Drive the animation by preparing to paint the next frame
-				// after this one is shown.
-				a.Send(paint.Event{})
-			case touch.Event:
-				touchX = e.X
-				touchY = e.Y
-			}
-		}
-	})
-}
+					onPaint(glctx, sz)
+					a.Publish()
+					// Drive the animation by preparing to paint the next frame
+					// after this one is shown.
+					a.Send(paint.Event{})
+				case touch.Event:
+					touchX = e.X
+					touchY = e.Y
+				} // switch e := a.Filter(e).(type) {
+			} // for e := range a.Events() {
+		}     // func(a app.App) {
+	)         // app.Main(
+} // main
 
 func onStart(glctx gl.Context) {
 	var err error
@@ -116,14 +118,14 @@ func onStart(glctx gl.Context) {
 
 	images = glutil.NewImages(glctx)
 	fps = debug.NewFPS(images)
-}
+} // onStart
 
 func onStop(glctx gl.Context) {
 	glctx.DeleteProgram(program)
 	glctx.DeleteBuffer(buf)
 	fps.Release()
 	images.Release()
-}
+} // onStop
 
 func onPaint(glctx gl.Context, sz size.Event) {
 	glctx.ClearColor(1, 0, 0, 1)
@@ -146,13 +148,13 @@ func onPaint(glctx gl.Context, sz size.Event) {
 	glctx.DisableVertexAttribArray(position)
 
 	fps.Draw(sz)
-}
+} // onPaint
 
 var triangleData = f32.Bytes(binary.LittleEndian,
-	0.0, 0.4, 0.0, // top left
-	0.0, 0.0, 0.0, // bottom left
-	0.4, 0.0, 0.0, // bottom right
-)
+0.0, 0.4, 0.0, // top left
+0.0, 0.0, 0.0, // bottom left
+0.4, 0.0, 0.0, // bottom right
+) // triangleData 
 
 const (
 	coordsPerVertex = 3
