@@ -19,7 +19,8 @@ import (
 	"strings"
 	"unicode/utf8"
 	*/
-	"time"
+
+	//"time"
 )
 
 // _toyFace implements the font.Face interface by measuring every rune's width
@@ -85,7 +86,7 @@ func textBoxMain() {
     _printFrame(&f, true)
 
 
-	time.Sleep(150 * time.Second)
+	//time.Sleep(150 * time.Second)
 
     fmt.Println("====")
 

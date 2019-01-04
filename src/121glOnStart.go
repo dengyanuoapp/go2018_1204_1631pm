@@ -13,12 +13,14 @@ import (
 	"golang.org/x/mobile/exp/f32"
 	"golang.org/x/mobile/exp/gl/glutil"
 	"golang.org/x/mobile/gl"
+
+	//"time"
 )
 
 var _triangleDataByteARR = f32.Bytes(binary.LittleEndian,
-	0.0, 0.05, 0.0, // top left
-	0.0, 0.0, 0.0, // bottom left
-	0.05, 0.0, 0.0, // bottom right
+0.0, 0.05, 0.0, // top left
+0.0, 0.0, 0.0, // bottom left
+0.05, 0.0, 0.0, // bottom right
 ) // _triangleDataByteARR
 
 const _vertexShaderSTR = `#version 100
@@ -56,6 +58,7 @@ func glOnStart(___glctx1 gl.Context) {
 		log.Printf("error creating GL program: %v", __err1)
 		return
 	}
+	test01() 
 
 	_glBuf = ___glctx1.CreateBuffer() // CreateBuffer() Buffer  // CreateFramebuffer creates a framebuffer object.
 	___glctx1.BindBuffer(gl.ARRAY_BUFFER, _glBuf) //  BindBuffer(target Enum, b Buffer)
@@ -68,3 +71,10 @@ func glOnStart(___glctx1 gl.Context) {
 	_glImages = glutil.NewImages(___glctx1)  // func (p *Images) NewImage(w, h int) *Image
 	_dbFps = debug.NewFPS(_glImages)         // func NewFPS(images *glutil.Images) *FPS
 } // glOnStart
+
+func test01() {
+	ggMain()
+	//time.Sleep(150 * time.Second)
+	textBoxMain()
+	//time.Sleep(150 * time.Second)
+}

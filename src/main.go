@@ -18,13 +18,6 @@ import (
 )
 
 func main() {
-	ggMain()
-	/*
-	time.Sleep(150 * time.Second)
-
-	textBoxMain()
-	time.Sleep(150 * time.Second)
 
 	app.Main(glMainLoop) // app.Main( // func(___a app.App) {
-	*/
 } // main
