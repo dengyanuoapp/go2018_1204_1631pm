@@ -96,8 +96,7 @@ func main() {
 					touchY = e.Y
 				} // switch e := a.Filter(e).(type) {
 			} // for e := range a.Events() {
-		}     // func(a app.App) {
-	)         // app.Main(
+		}) // app.Main( // func(a app.App) {
 } // main
 
 func onStart(glctx gl.Context) {
@@ -151,10 +150,10 @@ func onPaint(glctx gl.Context, sz size.Event) {
 } // onPaint
 
 var triangleData = f32.Bytes(binary.LittleEndian,
-0.0, 0.4, 0.0, // top left
-0.0, 0.0, 0.0, // bottom left
-0.4, 0.0, 0.0, // bottom right
-) // triangleData 
+	0.0, 0.4, 0.0, // top left
+	0.0, 0.0, 0.0, // bottom left
+	0.4, 0.0, 0.0, // bottom right
+) // triangleData
 
 const (
 	coordsPerVertex = 3
