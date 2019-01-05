@@ -11,7 +11,7 @@ import (
 	"golang.org/x/mobile/event/touch"
 	//"golang.org/x/mobile/exp/app/debug"
 	//"golang.org/x/mobile/exp/f32"
-	//"golang.org/x/mobile/exp/gl/glutil"
+	"golang.org/x/mobile/exp/gl/glutil"
 	"golang.org/x/mobile/gl"
 
 	"time"
@@ -20,6 +20,7 @@ import (
 var (
 	_touchX float32
 	_touchY float32
+	_glImage0E  *glutil.Image
 )
 
 func glMainLoop(___a app.App) {
@@ -50,7 +51,7 @@ func glMainLoop(___a app.App) {
 				continue
 			}
 
-			glOnPaint(__glctx, __sz0)
+			glOnPaint(__glctx, __sz0 , _glImage0E )
 			test01()
 			___a.Publish()
 			// Drive the animation by preparing to paint the next frame

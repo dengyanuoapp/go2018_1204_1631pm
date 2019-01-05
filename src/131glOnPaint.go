@@ -11,7 +11,7 @@ import (
 	//"golang.org/x/mobile/event/touch"
 	//"golang.org/x/mobile/exp/app/debug"
 	//"golang.org/x/mobile/exp/f32"
-	//"golang.org/x/mobile/exp/gl/glutil"
+	"golang.org/x/mobile/exp/gl/glutil"
 	"golang.org/x/mobile/gl"
 )
 
@@ -24,7 +24,7 @@ var (
 	_green float32
 )
 
-func glOnPaint(___glctx3 gl.Context, __sz3 size.Event) {
+func glOnPaint(___glctx3 gl.Context, __sz3 size.Event , ___glImage0E  *glutil.Image ) {
 	___glctx3.ClearColor(1, 0, 0, 1) // ClearColor(red, green, blue, alpha float32) // ClearColor specifies the RGBA values used to clear color buffers.
 	___glctx3.Clear(gl.COLOR_BUFFER_BIT) // Clear(mask Enum) // // Clear clears the window.
 
@@ -44,5 +44,13 @@ func glOnPaint(___glctx3 gl.Context, __sz3 size.Event) {
 	___glctx3.DrawArrays(gl.TRIANGLES, 0, _vertexCount)
 	___glctx3.DisableVertexAttribArray(_glPosition)
 
+	___glImage0E.Draw(
+		__sz3, 
+		_glImage0_topLeft		,
+		_glImage0_topRight		,
+		_glImage0_bottomLeft	,
+		_glImage0_srcBounds	)
+	//func (img *Image) Draw(sz size.Event, topLeft, topRight, bottomLeft geom.Point, srcBounds image.Rectangle)
+
 	_dbFps.Draw(__sz3)
-} // glOnPaint
+	} // glOnPaint

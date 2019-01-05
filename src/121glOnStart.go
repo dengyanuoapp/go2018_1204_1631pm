@@ -15,6 +15,8 @@ import (
 	"golang.org/x/mobile/gl"
 
 	//"time"
+	"golang.org/x/mobile/geom"
+	"image"
 )
 
 var _triangleDataByteARR = f32.Bytes(binary.LittleEndian,
@@ -49,6 +51,10 @@ var (
 	_glOffset   gl.Uniform
 	_glColor    gl.Uniform
 	_glBuf      gl.Buffer
+	_glImage0_topLeft		geom.Point  
+	_glImage0_topRight		geom.Point  
+	_glImage0_bottomLeft	geom.Point  
+	_glImage0_srcBounds		image.Rectangle
 )
 
 func glOnStart(___glctx1 gl.Context) {
@@ -69,6 +75,18 @@ func glOnStart(___glctx1 gl.Context) {
 	_glOffset = ___glctx1.GetUniformLocation(_glProgram, "offset")    // ...
 
 	_glImages = glutil.NewImages(___glctx1)  // func (p *Images) NewImage(w, h int) *Image
+
+	_glImage0_topLeft		= geom.Point{ 100 , 100 }
+	_glImage0_topRight		= geom.Point{ 300 , 800 }
+	_glImage0_bottomLeft	= geom.Point{ 400 , 400 }
+	//__ptMin					:= geom.Point{ 50 , 50 }
+	//__ptMax					:= geom.Point{ 80 , 80 }
+	//_glImage0_srcBounds		= image.Rectangle { __ptMin, __ptMax }
+	_glImage0_srcBounds		= image.Rectangle { image.Point{50,50}, image.Point{80,80}}
+	
+	_glImage0E = _glImages.NewImage( 30, 40 )
+	_addLabel(_glImage0E.RGBA, 20, 30, "Hello Go")
+
 	_dbFps = debug.NewFPS(_glImages)         // func NewFPS(images *glutil.Images) *FPS
 } // glOnStart
 
